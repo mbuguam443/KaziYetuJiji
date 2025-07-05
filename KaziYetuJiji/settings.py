@@ -30,6 +30,16 @@ SECRET_KEY = os.getenv("SECRET_KEY", "fallback-key-for-dev")
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
+# Tells Django where to look for static files (your custom Bootstrap, JS, etc.)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static')
+]
+
+# Tells Django where to collect all static files when using collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 ALLOWED_HOSTS = ["*"]
 
 LOGIN_REDIRECT_URL = 'home'
