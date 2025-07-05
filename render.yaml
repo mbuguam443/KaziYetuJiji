@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: kazi-yetu-jiji
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn KaziYetuJiji.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: KaziYetuJiji.settings
+      - key: SECRET_KEY
+        value: your-secret-key
+      - key: DEBUG
+        value: False
