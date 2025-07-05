@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Applications - KaziYetuJiji</title>
+    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">KaziYetuJiji</a>
+        <div class="ms-auto">
+            <a href="{% url 'job_seeker_dashboard' %}" class="btn btn-outline-light btn-sm me-2">My Applications</a>
+            <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2 class="mb-4">My Job Applications</h2>
+
+    {% if applications %}
+        <div class="list-group">
+            {% for app in applications %}
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-1">{{ app.job.title }}</h5>
+                        <small class="text-muted">Applied on {{ app.applied_at|date:"M d, Y" }}</small>
+                        <p class="mb-0">Location: {{ app.job.location }} | Wage: KSh {{ app.job.wage }}</p>
+                    </div>
+                    <span class="badge bg-{{ app.status|yesno:'success,warning,danger' }}">{{ app.status|capfirst }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">You haven’t applied for any jobs yet.</p>
+    {% endif %}
+</div>
+
+<script src="{% static 'core/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
